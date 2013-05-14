@@ -1,0 +1,33 @@
+{
+    "name": "goalio/goalio-forgotpassword-doctrine-mongo-odm",
+    "description": "Doctrine2 MongoDB ODM storage adapter for GoalioForgotPassword.",
+    "type": "library",
+    "keywords": [
+        "zf2"
+    ],
+    "homepage": "https://github.com/goalio/GoalioForgotPasswordDoctrineMongoODM",
+    "authors": [
+        {
+            "name": "Philipp Dobrigkeit",
+            "email": "p.dobrigkeit@goalio.de",
+            "homepage": "http://www.goalio.de"
+        },
+        {
+            "name": "Doron Gutman",
+            "email": "doron@gutman.me"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "goalio/goalio-forgotpassword": "0.*",
+        "doctrine/doctrine-mongo-odm-module": "0.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "GoalioForgotPasswordDoctrineMongoODM": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+}
