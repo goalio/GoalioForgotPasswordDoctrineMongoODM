@@ -3,11 +3,25 @@
 namespace GoalioForgotPasswordDoctrineMongoODM;
 
 use Doctrine\ODM\MongoDB\Mapping\Driver\XmlDriver;
-use ZfcUser\Module as ZfcUser;
+use Zend\EventManager\EventInterface;
+use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\ModuleManager\Feature\BootstrapListenerInterface;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
 
-class Module
+/**
+ * Class Module
+ * @package GoalioForgotPasswordDoctrineMongoODM
+ * @author Marcel Djaman <marceldjaman@gmail.com>
+ */
+class Module implements
+    AutoloaderProviderInterface,
+    ConfigProviderInterface,
+    BootstrapListenerInterface
 {
-    public function onBootstrap($e)
+    /**
+     * @param EventInterface $e
+     */
+    public function onBootstrap(EventInterface $e)
     {
         $app     = $e->getParam('application');
         $sm      = $app->getServiceManager();
@@ -20,6 +34,9 @@ class Module
         }
     }
 
+    /**
+     * @return array
+     */
     public function getAutoloaderConfig()
     {
         return array(
@@ -31,28 +48,9 @@ class Module
         );
     }
 
-    public function getServiceConfig()
-    {
-        return array(
-            'aliases' => array(
-                'goalioforgotpassword_doctrine_dm' => 'doctrine.documentmanager.odm_default',
-
-            ),
-            'factories' => array(
-                'goalioforgotpassword_module_options' => function ($sm) {
-                    $config = $sm->get('Config');
-                    return new Options\ModuleOptions(isset($config['goalioforgotpassword']) ? $config['goalioforgotpassword'] : array());
-                },
-                'goalioforgotpassword_password_mapper' => function ($sm) {
-                    return new \GoalioForgotPasswordDoctrineMongoODM\Mapper\Password(
-                        $sm->get('goalioforgotpassword_doctrine_dm'),
-                        $sm->get('goalioforgotpassword_module_options')
-                    );
-                },
-            ),
-        );
-    }
-
+    /**
+     * @return mixed
+     */
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
