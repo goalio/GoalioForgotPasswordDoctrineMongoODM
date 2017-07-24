@@ -1,5 +1,5 @@
 {
-    "name": "goalio/goalio-forgotpassword-doctrine-mongo-odm",
+    "name": "mdjaman/goalio-forgotpassword-doctrine-mongo-odm",
     "description": "Doctrine2 MongoDB ODM storage adapter for GoalioForgotPassword.",
     "type": "library",
     "keywords": [
